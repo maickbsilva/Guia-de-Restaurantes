@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista</title>
+<link rel="stylesheet" type="text/css" href="/materialize/css/materialize.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<header th:replace="fragments/padrao :: cabecalho"></header>
+	<table>
+		<thead>
+			<th>Id</th>
+			<th>Nome:</th>
+			<th>Email</th>
+			<th>Alterar</th>
+			<th>Excluir</th>
+		</thead>
+		
+		<tbody>
+			<tr th:each="adm:${admins}">
+			
+					<td th:text="${adm.id}"/>
+					<td th:text="${adm.nome}"/>
+					<td th:text="${adm.email}"/>		
+					<td><a th:href="@{/alterar(id=${adm.id})}">Alterar</a></td>
+					
+					<td><a th:attr="onclick=|return confirm('Deseja excluir: ${adm.nome}')|"
+			th:href="@{/excluir(id=${adm.id})}">Excluir </a> </td>
+					
+			</tr>
+
+		</tbody>
+	</table>
+	
+	  <ul class="pagination">
+    <li th:class="${pagAtual == 1 ? 'disable' : 'waves-effect'}"><a th:href="${pagAtual > 1 ? pagAtual -1 : '#'}"><i class="material-icons">chevron_left</i></a></li>	
+	
+	<li th:class="${pagAtual == p ? 'active blue' : 'waves-effect'}"  th:each="p:${numPaginas}">
+		<a th:href="${p}"><span th:text="${p}"></span></a>
+	</li>
+
+    <li class="waves-effect"><a th:href="${pagAtual < totalPages ? pagAtual +1 : '#'}"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+        <footer th:replace="fragments/padrao :: rodape"></footer>
+</body>
+
+</html>

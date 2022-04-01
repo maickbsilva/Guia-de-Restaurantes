@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Restaurantes</title>
+<link rel="stylesheet" type="text/css" href="/materialize/css/materialize.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<header th:replace="fragments/padrao :: cabecalho"></header>
+	
+		<form action="/busca">
+			<p><strong>Buscar por:</strong></p>
+			<input type="search" name="palavra" placeholder="Digite uma palavra"/>	
+				
+			<p><strong>Filtrar por:</strong></p>
+			<select name="escolha" required>
+			    <option value="" disabled selected>Escolha uma opção</option>
+				<option value="nome">Nome</option>
+				<option value="descricao">Descrição</option>
+				<option value="palavrasChave">Palavra-chave</option>
+			</select>
+							
+				<button class="waves-effect waves-light btn" type="submit"> Buscar </button>
+		</form>
+	
+	<table>
+		<thead>
+			<th>Id</th>
+			<th>Tipo de Restaurante:</th>
+			<th>Descrição</th>
+			<th>Palavras-chave</th>
+			<th>Alterar</th>
+			<th>Excluir</th>
+		</thead>
+		
+		<tbody>
+			<tr th:each="rest:${rests}">
+					<td th:text="${rest.id}"/>
+					<td th:text="${rest.nome}"/>
+					<td th:text="${rest.descricao}"/>
+					<td th:text="${rest.palavrasChave}"/>		
+					<td><a th:href="@{/alterarRest(id=${rest.id})}">Alterar</a></td>
+					
+					<td><a th:attr="onclick=|return confirm('Deseja excluir: ${rest.nome}')|"
+			th:href="@{/excluirRest(id=${rest.id})}">Excluir </a> </td>
+					
+			</tr>
+
+		</tbody>
+	</table>
+	
+	<ul class="pagination">
+	    <li th:class="${pagAtual == 1 ? 'disable' : 'waves-effect'}"><a th:href="${pagAtual > 1 ? pagAtual -1 : '#'}"><i class="material-icons">chevron_left</i></a></li>	
+		
+		<li th:class="${pagAtual == p ? 'active blue' : 'waves-effect'}"  th:each="p:${numPaginas}">
+			<a th:href="${p}"><span th:text="${p}"></span></a>
+		</li>
+	
+	    <li class="waves-effect"><a th:href="${pagAtual < totalPages ? pagAtual +1 : '#'}"><i class="material-icons">chevron_right</i></a></li>
+  	</ul>
+        <footer th:replace="fragments/padrao :: rodape"></footer>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="/materialize/js/materialize.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $('select').formSelect();
+          });
+        </script>
+        
+</body>
+
+
+</html>
