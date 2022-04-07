@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro Novo Restaurantes</title>
+<link rel="stylesheet" type="text/css"
+	href="/materialize/css/materialize.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+
+<body>
+
+	<header th:replace="fragments/padrao :: cabecalho"></header>
+
+
+	<div class="row">
+		<form class="col s12">
+			<div class="row">
+				<div class="input-field col s4">
+					<i class="material-icons prefix">account_circle</i> <input
+						id="nome" type="text" class="validate" name="nome"> <label
+						for="nome">Nome</label>
+				</div>
+				<div class="input-field col s4">
+					<i class="material-icons prefix">description</i> <input
+						id="descricao" type="text" class="validate" name="descricao">
+					<label for="descricao">Descrição</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">star_border</i> <input
+						id="atracoes" type="text" class="validate" name="atracoes">
+					<label for="atracoes">Atrações</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">payment</i> <input
+						id="formaDePagamento" type="text" class="validate"
+						name="formaDePagamento"> <label for="formaDePagamento">Formas
+						de Pagamento</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">access_time</i> <input
+						id="horario" type="text" class="validate" name="horario">
+					<label for="horario">Horario</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">insert_link</i> <input id="site"
+						type="text" class="validate" name="site"> <label
+						for="site">Site</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">phone</i> <input id="telefone"
+						type="text" class="validate" name="telefone"> <label
+						for="telefone">Telefone</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">add_location</i> <input
+						type="text" id="cep" class="validate" name="cep"> <label
+						for="cep">Cep</label>
+				</div>
+
+				<div class="input-field col s4">
+					<input type="text" id="rua" class="validate" name="rua"
+						readonly="readonly" placeholder="Rua">
+				</div>
+
+				<div class="input-field col s4">
+					<input type="text" id="bairro" class="validate" name="bairro"
+						readonly="readonly" placeholder="Bairro">
+				</div>
+
+				<div class="input-field col s4">
+					<input type="text" id="cidade" class="validate" name="cidade"
+						readonly="readonly" placeholder="Cidade">
+				</div>
+
+				<div class="input-field col s4">
+					<input type="text" id="uf" class="validate" name="uf"
+						readonly="readonly" placeholder="UF">
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">home</i> <input type="text"
+						id="numero" class="validate" name="numero"> <label
+						for="numero">Nº</label>
+				</div>
+
+				<div class="input-field col s4">
+					<input type="text" id="complemento" class="validate"
+						name="complemento"> <label for="complemento">Complemento</label>
+				</div>
+
+				<form action="#">
+					<div class="file-field input-field ">
+						<div class="btn amber accent-4">
+							<span>Fazer Upload de Imagens</span> <input type="file" id="imagem" name="foto" multiple>
+						</div>
+					</div>
+				</form>
+
+			</div>
+
+			<div class="row">
+
+				<div class="col s1">
+					<label> <input type="checkbox" /> <span>Delivery</span>
+					</label>
+				</div>
+
+				<div class="col s1">
+					<label> <input type="checkbox" /> <span>Acessibilidade</span>
+					</label>
+				</div>
+
+				<div class="col s1">
+					<label> <input type="checkbox" /> <span>Drive Thru</span>
+					</label>
+				</div>
+
+				<div class="col s1">
+					<label> <input type="checkbox" /> <span>Estacionamento</span>
+					</label>
+				</div>
+
+				<div class="col s1">
+					<label> <input type="checkbox" /> <span>Espaço Pet
+					</span>
+					</label>
+				</div>
+
+				<div class="col s1">
+					<label> <input type="checkbox" /> <span>Playground</span>
+					</label>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/padrao :: rodape"></footer>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="/materialize/js/materialize.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('select').formSelect();
+		});
+	</script>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+
+<script>
+	$(document).ready(
+			function() {
+
+				function limpa_formulário_cep() {
+					$("#rua").val("");
+					$("#bairro").val("");
+					$("#cidade").val("");
+					$("#uf").val("");
+				}
+
+				$("#cep").blur(
+						function() {
+
+							var cep = $(this).val().replace(/\D/g, '');
+
+							if (cep != "") {
+
+								var validacep = /^[0-9]{8}$/;
+
+								if (validacep.test(cep)) {
+
+									$("#rua").val("carregando...");
+									$("#bairro").val("carregando...");
+									$("#cidade").val("carregando...");
+									$("#uf").val("carregando...");
+
+									$.getJSON("https://viacep.com.br/ws/" + cep
+											+ "/json/?callback=?", function(
+											dados) {
+
+										if (!("erro" in dados)) {
+											$("#rua").val(dados.logradouro);
+											$("#bairro").val(dados.bairro);
+											$("#cidade").val(dados.localidade);
+											$("#uf").val(dados.uf);
+										} else {
+											limpa_formulário_cep();
+											alert("CEP não encontrado.");
+										}
+									});
+								} else {
+									limpa_formulário_cep();
+									alert("Formato de CEP inválido.");
+								}
+							} else {
+								limpa_formulário_cep();
+							}
+						});
+			});
+</script>
+
+</html>
