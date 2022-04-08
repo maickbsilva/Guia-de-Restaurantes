@@ -16,150 +16,186 @@
 
 
 	<div class="row">
-		<form class="col s12">
+		<form class="col s12" method="post" action="salvarRestaurante"
+			enctype="multipart/form-data">
 			<div class="row">
+
+				<input type="hidden" name="id" th:value="${restaurante?.id}" />
+
 				<div class="input-field col s4">
 					<i class="material-icons prefix">account_circle</i> <input
-						id="nome" type="text" class="validate" name="nome"> <label
-						for="nome">Nome</label>
+						id="nome" type="text" class="validate" name="nome"
+						th:value="${restaurante?.nome}"> <label for="nome">Nome</label>
 				</div>
+
 				<div class="input-field col s4">
 					<i class="material-icons prefix">description</i> <input
-						id="descricao" type="text" class="validate" name="descricao">
-					<label for="descricao">Descrição</label>
+						id="descricao" type="text" class="validate" name="descricao"
+						th:value="${restaurante?.descricao}"> <label
+						for="descricao">Descrição</label>
+				</div>
+
+				<div class="input-field col s4">
+					<select name="tipo.id">
+						<option th:each="r: ${tipos}" th:text="${r.nome}"
+							th:value="${r.id}"></option>
+					</select> <label>Tipo de Restaurante</label>
+				</div>
+
+				<div class="input-field col s4">
+					<i class="material-icons prefix">attach_money</i> <input id="preco"
+						type="text" class="validate" name="preco"
+						th:value="${restaurante?.preco}"> <label for="preco">Preco</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">star_border</i> <input
-						id="atracoes" type="text" class="validate" name="atracoes">
-					<label for="atracoes">Atrações</label>
+						id="atracoes" type="text" class="validate" name="atracoes"
+						th:value="${restaurante?.atracoes}"> <label for="atracoes">Atrações</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">payment</i> <input
 						id="formaDePagamento" type="text" class="validate"
-						name="formaDePagamento"> <label for="formaDePagamento">Formas
-						de Pagamento</label>
+						name="formaDePagamento"
+						th:value="${restaurante?.formaDePagamento}"> <label
+						for="formaDePagamento">Formas de Pagamento</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">access_time</i> <input
-						id="horario" type="text" class="validate" name="horario">
-					<label for="horario">Horario</label>
+						id="horario" type="text" class="validate" name="horario"
+						th:value="${restaurante?.horario}"> <label for="horario">Horario</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">insert_link</i> <input id="site"
-						type="text" class="validate" name="site"> <label
-						for="site">Site</label>
+						type="text" class="validate" name="site"
+						th:value="${restaurante?.site}"> <label for="site">Site</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">phone</i> <input id="telefone"
-						type="text" class="validate" name="telefone"> <label
-						for="telefone">Telefone</label>
+						type="text" class="validate" name="telefone"
+						th:value="${restaurante?.telefone}"> <label for="telefone">Telefone</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">add_location</i> <input
-						type="text" id="cep" class="validate" name="cep"> <label
-						for="cep">Cep</label>
+						type="text" id="cep" class="validate" name="cep"
+						th:value="${restaurante?.cep}"> <label for="cep">Cep</label>
 				</div>
 
 				<div class="input-field col s4">
-					<input type="text" id="rua" class="validate" name="rua"
-						readonly="readonly" placeholder="Rua">
+					<input type="text" id="rua" class="validate" name="endereco"
+						readonly="readonly" placeholder="Endereco"
+						th:value="${restaurante?.endereco}">
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="bairro" class="validate" name="bairro"
-						readonly="readonly" placeholder="Bairro">
+						readonly="readonly" placeholder="Bairro"
+						th:value="${restaurante?.bairro}">
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="cidade" class="validate" name="cidade"
-						readonly="readonly" placeholder="Cidade">
+						readonly="readonly" placeholder="Cidade"
+						th:value="${restaurante?.cidade}">
 				</div>
 
 				<div class="input-field col s4">
-					<input type="text" id="uf" class="validate" name="uf"
-						readonly="readonly" placeholder="UF">
+					<input type="text" id="uf" class="validate" name="estado"
+						readonly="readonly" placeholder="Estado"
+						th:value="${restaurante?.estado}">
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">home</i> <input type="text"
-						id="numero" class="validate" name="numero"> <label
-						for="numero">Nº</label>
+						id="numero" class="validate" name="numero"
+						th:value="${restaurante?.numero}"> <label for="numero">Nº</label>
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="complemento" class="validate"
-						name="complemento"> <label for="complemento">Complemento</label>
+						name="complemento" th:value="${restaurante?.complemento}">
+					<label for="complemento">Complemento</label>
 				</div>
-
-				<form action="#">
-					<div class="file-field input-field ">
+				
+				
+				<div class="row">
+					<div class="file-field input-field col s4">
 						<div class="btn amber accent-4">
-							<span>Fazer Upload de Imagens</span> <input type="file" id="imagem" name="foto" multiple>
+							<span>File</span> <input type="file" name="fileFotos" multiple>
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text"
+								placeholder="Upload one or more files">
 						</div>
 					</div>
-				</form>
+				</div>
 
 			</div>
 
 			<div class="row">
 
-				<div class="col s1">
-					<label> <input type="checkbox" /> <span>Delivery</span>
+				<div class="col s2">
+					<label> <input type="checkbox" name="delivery" /> <span>Delivery</span>
 					</label>
 				</div>
 
-				<div class="col s1">
-					<label> <input type="checkbox" /> <span>Acessibilidade</span>
+				<div class="col s2">
+					<label> <input type="checkbox" name="acessibilidade" /> <span>Acessibilidade</span>
 					</label>
 				</div>
 
-				<div class="col s1">
-					<label> <input type="checkbox" /> <span>Drive Thru</span>
+				<div class="col s2">
+					<label> <input type="checkbox" name="driveThru" /> <span>Drive
+							Thru</span>
 					</label>
 				</div>
 
-				<div class="col s1">
-					<label> <input type="checkbox" /> <span>Estacionamento</span>
+				<div class="col s2">
+					<label> <input type="checkbox" name="estacionamento" /> <span>Estacionamento</span>
 					</label>
 				</div>
 
-				<div class="col s1">
-					<label> <input type="checkbox" /> <span>Espaço Pet
-					</span>
+				<div class="col s2">
+					<label> <input type="checkbox" name="espacoPet" /> <span>Espaço
+							Pet </span>
 					</label>
 				</div>
 
-				<div class="col s1">
-					<label> <input type="checkbox" /> <span>Playground</span>
+				<div class="col s2">
+					<label> <input type="checkbox" name="playground" /> <span>Playground</span>
 					</label>
 				</div>
+
 			</div>
+
+			<button class="col s1 btn waves-effect waves-light" type="submit"
+				name="buton">
+				Enviar <i class="material-icons right">send</i>
+			</button>
+
 		</form>
 	</div>
+
+
+
 	<footer th:replace="fragments/padrao :: rodape"></footer>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="/materialize/js/materialize.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('select').formSelect();
-		});
-	</script>
 
 </body>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
+
 
 <script>
 	$(document).ready(
 			function() {
+
+				$('select').formSelect();
 
 				function limpa_formulário_cep() {
 					$("#rua").val("");

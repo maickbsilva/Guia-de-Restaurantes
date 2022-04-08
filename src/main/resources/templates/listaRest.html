@@ -24,7 +24,7 @@
 				<option value="palavrasChave">Palavra-chave</option>
 			</select>
 							
-				<button class="waves-effect waves-light btn" type="submit"> Buscar </button>
+				<button class="waves-effect waves-light btn amber accent-4" type="submit"> Buscar </button>
 		</form>
 	
 	<table>
@@ -56,11 +56,11 @@
 	<ul class="pagination">
 	    <li th:class="${pagAtual == 1 ? 'disable' : 'waves-effect'}"><a th:href="${pagAtual > 1 ? pagAtual -1 : '#'}"><i class="material-icons">chevron_left</i></a></li>	
 		
-		<li th:class="${pagAtual == p ? 'active blue' : 'waves-effect'}"  th:each="p:${numPaginas}">
+		<li th:class="${pagAtual == p ? 'active blue' : 'waves-effect'} "  th:each="p:${numPaginas}">
 			<a th:href="${p}"><span th:text="${p}"></span></a>
 		</li>
 	
-	    <li class="waves-effect"><a th:href="${pagAtual < totalPages ? pagAtual +1 : '#'}"><i class="material-icons">chevron_right</i></a></li>
+	    <li class="waves-effect "><a th:href="${pagAtual < totalPages ? pagAtual +1 : '#'}"><i class="material-icons">chevron_right</i></a></li>
   	</ul>
         <footer th:replace="fragments/padrao :: rodape"></footer>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
