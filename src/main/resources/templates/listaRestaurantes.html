@@ -2,7 +2,7 @@
 <html xmlns:th="http://tymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Lista de Restaurantes</title>
+<title>Lista de Restaurantes Cadastrados</title>
 <link rel="stylesheet" type="text/css" href="/materialize/css/materialize.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -12,41 +12,30 @@
 
 	<header th:replace="fragments/padrao :: cabecalho"></header>
 	
-		<form action="/busca">
-			<p><strong>Buscar por:</strong></p>
-			<input type="search" name="palavra" placeholder="Digite uma palavra"/>	
-				
-			<p><strong>Filtrar por:</strong></p>
-			<select name="escolha" required>
-			    <option value="" disabled selected>Escolha uma opção</option>
-				<option value="nome">Nome</option>
-				<option value="descricao">Descrição</option>
-				<option value="palavrasChave">Palavra-chave</option>
-			</select>
-							
-				<button class="waves-effect waves-light btn amber accent-4" type="submit"> Buscar </button>
-		</form>
-	
 	<table class="striped">
 		<thead>
 			<th>Id</th>
-			<th>Tipo de Restaurante:</th>
-			<th>Descrição</th>
-			<th>Palavras-chave</th>
+			<th>Nome:</th>
+			<th>Descrição:</th>
+			<th>Formas de Pagamento</th>
+			<th>Horarios:</th>
+			<th>Fotos:</th>
 			<th>Alterar</th>
 			<th>Excluir</th>
 		</thead>
 		
 		<tbody>
-			<tr th:each="rest:${rests}">
-					<td th:text="${rest.id}"/>
-					<td th:text="${rest.nome}"/>
-					<td th:text="${rest.descricao}"/>
-					<td th:text="${rest.palavrasChave}"/>		
-					<td><a th:href="@{/alterarRest(id=${rest.id})}">Alterar</a></td>
+			<tr th:each="restaurantes:${restaurantes}">
+					<td th:text="${restaurantes.id}"/>
+					<td th:text="${restaurantes.nome}"/>
+					<td th:text="${restaurantes.descricao}"/>
+					<td th:text="${restaurantes.formaDePagamento}"/>
+					<td th:text="${restaurantes.horario}" /> 	
+					<td> <img th:src="${restaurantes.fotos}"/> 						
+					<td><a th:href="@{/alterarRestaurantes(id=${restaurantes.id})}">Alterar</a></td>
 					
-					<td><a th:attr="onclick=|return confirm('Deseja excluir: ${rest.nome}')|"
-			th:href="@{/excluirRest(id=${rest.id})}">Excluir </a> </td>
+					<td><a th:attr="onclick=|return confirm('Deseja excluir: ${restaurantes.nome}')|"
+			th:href="@{/excluirRestaurantes(id=${restaurantes.id})}">Excluir </a> </td>
 					
 			</tr>
 

@@ -20,18 +20,18 @@
 			enctype="multipart/form-data">
 			<div class="row">
 
-				<input type="hidden" name="id" th:value="${restaurante?.id}" />
+				<input type="hidden" name="id" th:value="${restaurantes?.id}" />
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">account_circle</i> <input
 						id="nome" type="text" class="validate" name="nome"
-						th:value="${restaurante?.nome}"> <label for="nome">Nome</label>
+						th:value="${restaurantes?.nome}"> <label for="nome">Nome</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">description</i> <input
 						id="descricao" type="text" class="validate" name="descricao"
-						th:value="${restaurante?.descricao}"> <label
+						th:value="${restaurantes?.descricao}"> <label
 						for="descricao">Descrição</label>
 				</div>
 
@@ -45,80 +45,80 @@
 				<div class="input-field col s4">
 					<i class="material-icons prefix">attach_money</i> <input id="preco"
 						type="text" class="validate" name="preco"
-						th:value="${restaurante?.preco}"> <label for="preco">Preco</label>
+						th:value="${restaurantes?.preco}"> <label for="preco">Preco</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">star_border</i> <input
 						id="atracoes" type="text" class="validate" name="atracoes"
-						th:value="${restaurante?.atracoes}"> <label for="atracoes">Atrações</label>
+						th:value="${restaurantes?.atracoes}"> <label for="atracoes">Atrações</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">payment</i> <input
 						id="formaDePagamento" type="text" class="validate"
 						name="formaDePagamento"
-						th:value="${restaurante?.formaDePagamento}"> <label
+						th:value="${restaurantes?.formaDePagamento}"> <label
 						for="formaDePagamento">Formas de Pagamento</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">access_time</i> <input
 						id="horario" type="text" class="validate" name="horario"
-						th:value="${restaurante?.horario}"> <label for="horario">Horario</label>
+						th:value="${restaurantes?.horario}"> <label for="horario">Horario</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">insert_link</i> <input id="site"
 						type="text" class="validate" name="site"
-						th:value="${restaurante?.site}"> <label for="site">Site</label>
+						th:value="${restaurantes?.site}"> <label for="site">Site</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">phone</i> <input id="telefone"
 						type="text" class="validate" name="telefone"
-						th:value="${restaurante?.telefone}"> <label for="telefone">Telefone</label>
+						th:value="${restaurantes?.telefone}"> <label for="telefone">Telefone</label>
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">add_location</i> <input
 						type="text" id="cep" class="validate" name="cep"
-						th:value="${restaurante?.cep}"> <label for="cep">Cep</label>
+						th:value="${restaurantes?.cep}"> <label for="cep">Cep</label>
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="rua" class="validate" name="endereco"
 						readonly="readonly" placeholder="Endereco"
-						th:value="${restaurante?.endereco}">
+						th:value="${restaurantes?.endereco}">
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="bairro" class="validate" name="bairro"
 						readonly="readonly" placeholder="Bairro"
-						th:value="${restaurante?.bairro}">
+						th:value="${restaurantes?.bairro}">
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="cidade" class="validate" name="cidade"
 						readonly="readonly" placeholder="Cidade"
-						th:value="${restaurante?.cidade}">
+						th:value="${restaurantes?.cidade}">
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="uf" class="validate" name="estado"
 						readonly="readonly" placeholder="Estado"
-						th:value="${restaurante?.estado}">
+						th:value="${restaurantes?.estado}">
 				</div>
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">home</i> <input type="text"
 						id="numero" class="validate" name="numero"
-						th:value="${restaurante?.numero}"> <label for="numero">Nº</label>
+						th:value="${restaurantes?.numero}"> <label for="numero">Nº</label>
 				</div>
 
 				<div class="input-field col s4">
 					<input type="text" id="complemento" class="validate"
-						name="complemento" th:value="${restaurante?.complemento}">
+						name="complemento" th:value="${restaurantes?.complemento}">
 					<label for="complemento">Complemento</label>
 				</div>
 				
@@ -134,40 +134,52 @@
 						</div>
 					</div>
 				</div>
+				
+				<div th:if="${restaurantes?.fotos?.length > 0}">
+					<h6>Fotos cadastradas:</h6>
+					<div>
+						<ul id="">
+							<li th:each="fotos : ${restaurantes?.verFotos()}">
+								<a th:href="${fotos}" target="blank"><img th:src="${fotos}"/></a>
+							</li>
+						
+						</ul>
+					</div>
+				</div>
 
 			</div>
 
 			<div class="row">
 
 				<div class="col s2">
-					<label> <input type="checkbox" name="delivery" /> <span>Delivery</span>
+					<label> <input type="checkbox" name="delivery" th:checked="${restaurantes?.delivery}" /> <span>Delivery</span>
 					</label>
 				</div>
 
 				<div class="col s2">
-					<label> <input type="checkbox" name="acessibilidade" /> <span>Acessibilidade</span>
+					<label> <input type="checkbox" name="acessibilidade" th:checked="${restaurantes?.acessibilidade}"/> <span>Acessibilidade</span>
 					</label>
 				</div>
 
 				<div class="col s2">
-					<label> <input type="checkbox" name="driveThru" /> <span>Drive
+					<label> <input type="checkbox" name="driveThru" th:checked="${restaurantes?.driveThru}"/> <span>Drive
 							Thru</span>
 					</label>
 				</div>
 
 				<div class="col s2">
-					<label> <input type="checkbox" name="estacionamento" /> <span>Estacionamento</span>
+					<label> <input type="checkbox" name="estacionamento" th:checked="${restaurantes?.estacionamento}"/> <span>Estacionamento</span>
 					</label>
 				</div>
 
 				<div class="col s2">
-					<label> <input type="checkbox" name="espacoPet" /> <span>Espaço
+					<label> <input type="checkbox" name="espacoPet" th:checked="${restaurantes?.espacoPet}"/> <span>Espaço
 							Pet </span>
 					</label>
 				</div>
 
 				<div class="col s2">
-					<label> <input type="checkbox" name="playground" /> <span>Playground</span>
+					<label> <input type="checkbox" name="playground" th:checked="${restaurantes?.playground}"/> <span>Playground</span>
 					</label>
 				</div>
 
