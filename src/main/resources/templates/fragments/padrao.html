@@ -3,59 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/materialize/css/materialize.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/materialize/css/materialize.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 </head>
 <body>
 	<header th:fragment="cabecalho">
-	<nav>
-    <div class="nav-wrapper red">
-      <a href="#!" class="brand-logo right">Gerenciador de Restaurantes</a>
-      
-       <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/cadastroRestaurante">Cadastrar Restaurante</a></li>
-      </ul>
-      
-      <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/AdminPage">Cadastrar Administrador</a></li>
-      </ul>
-      
-       <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/formRest">Cadastrar Tipo de Restaurante</a></li>
-      </ul>
-      
-       <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/listaRest/1">Lista Tipo de Restaurantes</a></li>
-      </ul>
-      
-      <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/listaAdmin/1">Lista de Admins</a></li>
-      </ul>
-      
-        <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/listaRestaurantes/1">Lista de Restaurantes</a></li>
-      </ul>
-    </div>
-  </nav>
-  </header>
-  
-            <footer th:fragment="rodape" class="page-footer red" style="margin-top: auto">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Desenvolvido por Maick S.</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              </div>
-            </div>
-          
-          <div class="footer-copyright">
-            <div class="container">
-            © 2022 Copyright Text
-            </div>
-          </div>
-        </footer>
+
+		<div class="nav-wrapper">
+
+			<ul id="dropdown2" class="dropdown-content">
+				<li><a href="/formRest">Tipo de Restaurante</a></li>
+				<li><a href="/AdminPage">Administrador</a></li>
+				<li class="divider"></li>
+				<li><a href="/cadastroRestaurante">Restaurante</a></li>
+			</ul>
+
+
+			<ul id="dropdown1" class="dropdown-content">
+				<li><a href="/listaAdmin/1">Admin</a></li>
+				<li><a href="/listaRestaurantes/1">Restaurantes</a></li>
+				<li class="divider"></li>
+				<li><a href="/listaRest/1">Tipo de Restaurantes</a></li>
+			</ul>
+
+			<nav>
+				<div class="nav-wrapper">
+					<a href="#!" class="brand-logo center">Guia de Restaurantes</a>
+
+					<ul class="right hide-on-med-and-down">
+
+						<!-- Dropdown Trigger -->
+						<li><a class="dropdown-trigger" href="#!"
+							data-target="dropdown2">Cadastros<i
+								class="material-icons right">arrow_drop_down</i></a></li>
+					</ul>
+					<ul class="right hide-on-med-and-down">
+
+						<!-- Dropdown Trigger -->
+						<li><a class="dropdown-trigger" href="#!"
+							data-target="dropdown1">Listas<i class="material-icons right">arrow_drop_down</i></a></li>
+					</ul>
+
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<footer th:fragment="rodape" class="page-footer red"
+		style="margin-top: auto">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Desenvolvido por Maick S.</h5>
+					<p class="grey-text text-lighten-4">You can use rows and
+						columns here to organize your footer content.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-copyright">
+			<div class="container">© 2022 Copyright Text</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="/materialize/js/materialize.min.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$(".dropdown-trigger").dropdown();
+			});
+		</script>
+	</footer>
 
 
 </body>
+
+
 </html>

@@ -3,6 +3,7 @@ package br.senai.sp.cfp138.guiderest.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +132,21 @@ public class GuideRestController {
 		return "redirect:listaAdmin/1";
 	}
 	
+	@RequestMapping("login")
+	public String login(Administrador admLogin, RedirectAttributes attr, HttpSession session) {
+		//busca o adm no banco
+		Administrador admin = repository.findByEmailAndSenha(admLogin.getEmail(), admLogin.getSenha());
+		
+		//verificar se existe
+		if (admin == null) {
+			attr.addAttribute("mensagemErro", "Login e/ou senha inválido(s)");
+			return "redirect:/";
+		}else {
+			//salva na sessao
+			session.setAttribute("usuarioLogado", admin);
+			return "redirect:/listaRestaurantes/1";
+		}
+	}
 	
 	
 }

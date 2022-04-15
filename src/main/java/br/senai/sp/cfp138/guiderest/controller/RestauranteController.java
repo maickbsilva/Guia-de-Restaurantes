@@ -41,7 +41,7 @@ public class RestauranteController {
 	public String salvar(Restaurante restaurante, @RequestParam("fileFotos") MultipartFile[] fileFotos) {
 
 		// string para armazenar as URLs
-		String fotos = "";
+		String fotos = restaurante.getFotos();
 
 		// percorre cada arquivo no vetor
 		for (MultipartFile arquivo : fileFotos) {
@@ -112,7 +112,15 @@ public class RestauranteController {
 	
 	@RequestMapping("excluirRestaurantes")
 	public String excluirRest(Long id) {
-		repository.deleteById(id);
+		Restaurante rest = repository.findById(id).get();
+		if (rest.getFotos().length() > 0) {
+			for (String foto : rest.verFotos()) {
+				fireUtil.deletar(foto);
+			}
+		}
+		
+		repository.delete(rest);
+		
 		return "redirect:listaRestaurantes/1";
 	}
 	
