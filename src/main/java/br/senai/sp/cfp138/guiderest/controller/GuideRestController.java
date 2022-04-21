@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.hash.Hashing;
 
+import br.senai.sp.cfp138.guiderest.annotation.Publico;
 import br.senai.sp.cfp138.guiderest.model.Administrador;
 import br.senai.sp.cfp138.guiderest.repository.AdminRepository;
 import br.senai.sp.cfp138.guiderest.util.HashUtil;
@@ -133,6 +134,7 @@ public class GuideRestController {
 	}
 	
 	@RequestMapping("login")
+	@Publico
 	public String login(Administrador admLogin, RedirectAttributes attr, HttpSession session) {
 		//busca o adm no banco
 		Administrador admin = repository.findByEmailAndSenha(admLogin.getEmail(), admLogin.getSenha());
@@ -146,6 +148,13 @@ public class GuideRestController {
 			session.setAttribute("usuarioLogado", admin);
 			return "redirect:/listaRestaurantes/1";
 		}
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		//invalida a sessao
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	

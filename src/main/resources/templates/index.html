@@ -59,19 +59,19 @@
 				<form class="login100-form validate-form flex-sb flex-w"
 					method="post" action="login">
 
-					<input type="hidden" name="id" th:value="${adm?.id}" /> <span
+					<input type="hidden" name="id" /> <span
 						class="login100-form-title p-b-51"> Login de Administrador
 					</span>
 
 
-					<div class="wrap-input100 validate-input m-b-16"
+					<div class="wrap-input100 m-b-16"
 						data-validate="Digite seu usuário">
-						<input class="input100" type="text" name="nome"
-							placeholder="Email" th:value="${adm?.nome}"> <span
+						<input class="input100" type="text" name="email"
+							placeholder="Email"> <span
 							class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-16"
+					<div class="wrap-input100 m-b-16"
 						data-validate="Digite uma senha">
 						<input class="input100" type="password" name="senha"
 							placeholder="Senha"> <span class="focus-input100"></span>

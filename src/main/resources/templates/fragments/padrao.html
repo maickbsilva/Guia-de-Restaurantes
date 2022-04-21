@@ -28,26 +28,39 @@
 				<li><a href="/listaRest/1">Tipo de Restaurantes</a></li>
 			</ul>
 
+			<!-- th:if="${session.usuarioLogado != null}" -->
+
 			<nav>
-				<div class="nav-wrapper">
+				<div class="nav-wrapper red">
 					<a href="#!" class="brand-logo center">Guia de Restaurantes</a>
 
-					<ul class="right hide-on-med-and-down">
+					<ul class="right hide-on-med-and-down"
+						th:if="${session.usuarioLogado != null}">
 
 						<!-- Dropdown Trigger -->
 						<li><a class="dropdown-trigger" href="#!"
 							data-target="dropdown2">Cadastros<i
 								class="material-icons right">arrow_drop_down</i></a></li>
 					</ul>
-					<ul class="right hide-on-med-and-down">
+					<ul class="right hide-on-med-and-down"
+						th:if="${session.usuarioLogado != null}">
 
 						<!-- Dropdown Trigger -->
 						<li><a class="dropdown-trigger" href="#!"
 							data-target="dropdown1">Listas<i class="material-icons right">arrow_drop_down</i></a></li>
 					</ul>
 
+					<ul th:if="${session.usuarioLogado != null}">
+						<li><a href="/logout"><i class="material-icons right">exit_to_app</i></a>
+						</li>
+					</ul>
 				</div>
+
+
 			</nav>
+
+
+
 		</div>
 	</header>
 
